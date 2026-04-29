@@ -14,14 +14,12 @@ object pepita {
 
 	
 
-	method image() = if(self.estaMuerta() || self.estaCansada() ){ "pepita-gris.png" } else "pepita.png"
+	method image() = if(self.estaCansada() ){ "pepita-gris.png" } else "pepita.png"
 	
 	method estaCansada() = energia <= 0
 
-	method estaMuerta() {
-		return position == game.at(silvestre.position().x() , 0 )
 		
-	}
+	
 
 
 	method positionX() = position.x() 
@@ -32,19 +30,29 @@ object pepita {
 		direccion.mover(self)
 		self.volar()
 		
+		
 	}
  
+	method comerAca() {
+		const hayComida = game.uniqueCollider(self)
+		if(hayComida != null){
+			self.comer(comida1)
+			game.removeVisual(comida1)
+		}
+		
+	}
 
 	method comer(comida) {
 		energia = energia + comida.energiaQueOtorga()
 	}
 
 	method volar() {
-		if(self.estaCansada()){
-			game.stop()
+		if(!self.estaCansada()){
+			energia = energia - 9 
+			
 		}
 		else 
-		energia = energia - 9 
+			game.stop()
 	}
 	
 	method energia() {

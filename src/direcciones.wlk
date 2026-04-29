@@ -25,6 +25,7 @@ object izquierda {
 }
 
 object derecha {
+	method image() = "pepita-derecha.png"
 	method mover(personaje) {
 		if (personaje.positionX() < game.width() - 1) {
 			personaje.position(game.at(personaje.positionX() + 1, personaje.positionY()))
