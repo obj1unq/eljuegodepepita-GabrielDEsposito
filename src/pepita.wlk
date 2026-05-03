@@ -7,40 +7,62 @@ object pepita {
 	var energia = 100
 	var property position = game.at(3, 5)
 	method text() = "Energía: " + self.energia().toString()
-	
+	method positionX() = position.x() 
+	method positionY() = position.y() 
 	
 
 	//method image() = "pepita.png"
 
 	
-
 	method image() = if(self.estaCansada() ){ "pepita-gris.png" } else "pepita.png"
 	
 	method estaCansada() = energia <= 0
 
 		
-	
+	method estaAtrapada() {
+	  self.position() == silvestre.position()
+	}
 
 
-	method positionX() = position.x() 
-	method positionY() = position.y() 
 	
-	
+	method gravedad() {
+	  if(self.positionY() != 0 ){
+		self.position(game.at(self.positionX(), self.positionY() - 1))
+	  }
+	}
+
+	method al() {
+	  
+	}
+
+
 	method mover(direccion) {
 		direccion.mover(self)
-		self.volar()
+		self.volar()	
 		
-		
+	}
+
+	
+	
+
+	method intentarComer() {
+  	try {
+    		self.comerAca()
+  		}	 catch e : wollok.lang.Exception {
+    		game.say(self, "No hay nada aca")
+  		}
 	}
  
 	method comerAca() {
 		const hayComida = game.uniqueCollider(self)
 		if(hayComida != null){
-			self.comer(comida1)
-			game.removeVisual(comida1)
+			self.comer(hayComida)
+			game.removeVisual(hayComida)
+			manzana1.posicionAleatoria()
 		}
-		
 	}
+
+	
 
 	method comer(comida) {
 		energia = energia + comida.energiaQueOtorga()

@@ -17,20 +17,23 @@ program PepitaGame {
 	keyboard.down().onPressDo({ pepita.mover(abajo) })
     keyboard.right().onPressDo({ pepita.mover(derecha) })
     keyboard.left().onPressDo({ pepita.mover(izquierda) })
-	keyboard.c().onPressDo { pepita.comerAca() }
+	keyboard.c().onPressDo { pepita.intentarComer() }
 
-	 game.onTick(1000, "gravedad", { pepita.position(game.at(pepita.positionX(), pepita.positionY() - 1)) })
+	 game.onTick(1000, "gravedad", { pepita.gravedad() })
+	 game.onTick(3000, "aparicion", { generarComida.iniciar() })
+	  
 
 	 game.onCollideDo(silvestre, { pepita => silvestre.atrapar()})
-	 game.onCollideDo(meta, { pepita => meta.ganar()})
+	 game.onCollideDo(nido, { pepita => nido.ganar()})
 	 
 
 
   	game.addVisual(silvestre)
 	game.addVisual(nido)
-  	game.addVisual(pepita)
-	game.addVisual(comida1)
-	game.addVisual(meta)
+	game.addVisual(manzana1)
+	game.addVisual(alpiste1)
+	game.addVisual(pepita)
+
 	
 
 	game.start()

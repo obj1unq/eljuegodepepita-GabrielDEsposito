@@ -1,34 +1,48 @@
+import pepita.*
+
+
+
 object arriba {
-	method mover(personaje) {
-		if (personaje.positionY() < game.height() - 1) {
-			personaje.position(game.at(personaje.positionX(), personaje.positionY() + 1))
+	
+	method mover(direccion) {
+		
+		if (pepita.positionY() < game.height() - 1) {
+			pepita.position(game.at(pepita.positionX(), pepita.positionY() + 1))
 		}
+
 	}
     
 }
 
 object abajo {
-	method mover(personaje) {
-		if (personaje.positionY() > 0) {
-			personaje.position(game.at(personaje.positionX(), personaje.positionY() - 1))
+	
+	method mover(direccion) {
+		if (pepita.positionY() > 0) {
+			pepita.position(game.at(pepita.positionX(), pepita.positionY() - 1))
 		}
+		
 		
 	}
 }
 
 object izquierda {
-	method mover(personaje) {
-		if (personaje.positionX() > 0) {
-			personaje.position(game.at(personaje.positionX() - 1, personaje.positionY()))
-		}
+	
+	method mover(direccion) {
+		if (pepita.positionX() > 0) {
+			pepita.position(game.at(pepita.positionX() - 1, pepita.positionY()))
+		}  
 	}
 }
 
 object derecha {
-	method image() = "pepita-derecha.png"
-	method mover(personaje) {
-		if (personaje.positionX() < game.width() - 1) {
-			personaje.position(game.at(personaje.positionX() + 1, personaje.positionY()))
+
+	method mover(direccion) {
+		if (pepita.positionX() < game.width() - 1) {
+			pepita.position(game.at(pepita.positionX() + 1, pepita.positionY()))
 		}
 	}
+
+	
+	
 }
+
