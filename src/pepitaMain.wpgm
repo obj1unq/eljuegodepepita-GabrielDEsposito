@@ -1,0 +1,41 @@
+
+import pepita.*
+import comidas.*
+// import niveles.*
+import extras.*
+import direcciones.*
+
+
+
+program PepitaGame {
+	game.title("Pepita")
+	game.height(10)
+	game.width(10)
+	game.boardGround("fondo.jpg")
+
+	keyboard.up().onPressDo({ pepita.mover(arriba) })
+	keyboard.down().onPressDo({ pepita.mover(abajo) })
+    keyboard.right().onPressDo({ pepita.mover(derecha) })
+    keyboard.left().onPressDo({ pepita.mover(izquierda) })
+	keyboard.c().onPressDo { pepita.intentarComer() }
+
+	 game.onTick(1000, "gravedad", { pepita.gravedad() })
+	 game.onTick(3000, "aparicion", { generarComida.iniciar() })
+	  
+
+	 game.onCollideDo(silvestre, { pepita => silvestre.atrapar()})
+	 game.onCollideDo(nido, { pepita => nido.ganar()})
+	 
+
+
+  	game.addVisual(silvestre)
+	game.addVisual(nido)
+	game.addVisual(manzana1)
+	game.addVisual(alpiste1)
+	game.addVisual(pepita)
+
+	
+
+	game.start()
+
+}
